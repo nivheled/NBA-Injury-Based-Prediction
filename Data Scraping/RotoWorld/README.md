@@ -1,4 +1,3 @@
 # RotoWorld
 
-In order to test the correlation between betting lines and the players' injuries,
-we extracted from the ROTOWOLD website historical injury data of the NBA players that contain live-time reports for each status of the NBA players
+To test the connection between betting lines and the players' injuries, we used selenium to extract injury status reports from RotoWorld that contained live-time data of the NBA players.
