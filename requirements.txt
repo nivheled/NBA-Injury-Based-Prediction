@@ -1,0 +1,9 @@
+beautifulsoup4==4.9.1
+ChromeDriver==86
+numpy==1.18.1
+pandas==1.0.5
+python==3.8.3
+regex==2020.6.8
+requests==2.24.0
+selenium==3.141.0
+tabula-py==2.1.1
