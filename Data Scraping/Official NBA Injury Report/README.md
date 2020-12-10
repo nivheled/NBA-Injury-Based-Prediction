@@ -37,6 +37,8 @@ At this stage, the dataframe looks like this:
 
 As you can see, every cell is located in the right column. The next step is to fill the NAs, to clean the data (team name, date & time and more) and to decide about one identical pattern that will guide us in every data we will scrape.
 
-After the cleaning (and quiet long) process, which you can fully see [here](https://github.com/nivniv123/NBA-betting-project/blob/master/Data%20Scraping/Official%20NBA%20Injury%20Report/Fully%20Cleaning%20Injury%20Reports), our injury report is well organized:
+After the cleaning process, our injury report is well organized:
+
+![nba report](https://user-images.githubusercontent.com/75788772/101799752-32595780-3b15-11eb-9e6f-d10e59370090.PNG)
 
 
