@@ -63,7 +63,7 @@ def click_games(driver,games):
             time.sleep(1)
     return boolean
 
-def extacrct_lines_change_table_to_df(game_info):
+def extract_lines_change_table_to_df(game_info):
     """
     a function that extracts the important data from a div of a game 
     :param game_info: bs4.element.Tag - the div game_info of a game included table of lines change 
@@ -98,7 +98,7 @@ def extacrct_lines_change_table_to_df(game_info):
     return team_name,df
 
 
-def extacrct_game_to_df(div):
+def extract_game_to_df(div):
     """
     a function that extracts the important data from a div of a game 
     :param div: bs4.element.Tag - the div of a game 
@@ -142,7 +142,7 @@ def fill_NaN_cells(df):
     df = df.iloc[1:]
     return df 
 
-def extarct_df_for_day(page_source):
+def extract_df_for_day(page_source):
     """
     a function that gets a page source HTML code and returns a data frame of all the games and 
     the useful details on the games
@@ -170,7 +170,7 @@ def extarct_df_for_day(page_source):
     games_info = soup.find_all('div',class_ = 'game-info')
     dic = {}
     for game_info in games_info:
-        teams_names_and_lines = extacrct_lines_change_table_to_df(game_info)
+        teams_names_and_lines = extract_lines_change_table_to_df(game_info)
         dic[teams_names_and_lines[0]] = teams_names_and_lines[1]
 
     # find all games from the soup object
@@ -181,7 +181,7 @@ def extarct_df_for_day(page_source):
    
     # add games to the data frame
     for game in (game_a_filtered):
-        df1 = extacrct_game_to_df(game)
+        df1 = extract_game_to_df(game)
         home_team = df1.iloc[0,1]
         if(is_contain_game(df,home_team)):
             continue
@@ -191,7 +191,7 @@ def extarct_df_for_day(page_source):
         df = df.append(df1)
         
     for game in (game_b_filtered):
-        df1 = extacrct_game_to_df(game)
+        df1 = extract_game_to_df(game)
         home_team = df1.iloc[0,1]
         if(is_contain_game(df,home_team)):
             continue
@@ -201,7 +201,7 @@ def extarct_df_for_day(page_source):
         df = df.append(df1)
         
     for game in (game_a_open):
-        df1 = extacrct_game_to_df(game)
+        df1 = extract_game_to_df(game)
         home_team = df1.iloc[0,1]
         if(is_contain_game(df,home_team)):
             continue
@@ -211,7 +211,7 @@ def extarct_df_for_day(page_source):
         df = df.append(df1)
         
     for game in (game_b_open):
-        df1 = extacrct_game_to_df(game)
+        df1 = extract_game_to_df(game)
         home_team = df1.iloc[0,1]
         if(is_contain_game(df,home_team)):
             continue
@@ -304,7 +304,7 @@ def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_p
         time.sleep(2)
 
         content = driver.page_source
-        df = extarct_df_for_day(content)
+        df = extract_df_for_day(content)
         path = folder_path + 'NBA games on ' + start_date +'.csv'
         df.to_csv(path, index = False)
         print("NBA games on", start_date , "saved")
