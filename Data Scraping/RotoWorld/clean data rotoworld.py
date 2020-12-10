@@ -141,6 +141,4 @@ def organize_roto(df):
 
 #main
 
-roto_world = pd.read_csv("C:/Users/97254/Desktop/winner project/datasets/rotoworld_injuries_not_clean.csv")
-df = organize_roto(roto_world)
 
