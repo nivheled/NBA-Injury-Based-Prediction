@@ -13,9 +13,9 @@ soup = BeautifulSoup(page,'lxml')
 
 def extarct_games_to_df(soup):
     """
-    function extract winner games and lines to data frame 
+    function that extract winner games and lines to a dataframe 
     :param soup: bs4.BeautifulSoup - soup of a page
-    :return: data frame - data frame with NBA winner games and lines 
+    :return: data frame - dataframe with NBA winner games and lines 
     """   
     
     teams = {"יוטה ג'אז" : "Utah Jazz","ניו אורלינס פליקאנס" : "New Orleans Pelicans", "דנבר נאגטס" : "Denver Nuggets",
