@@ -13,7 +13,7 @@ soup = BeautifulSoup(page,'lxml')
 
 def extarct_games_to_df(soup):
     """
-    function that extract winner games and lines to a dataframe 
+    a function that extracts winner games and lines to a dataframe 
     :param soup: bs4.BeautifulSoup - soup of a page
     :return: data frame - dataframe with NBA winner games and lines 
     """   
