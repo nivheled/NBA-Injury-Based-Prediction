@@ -1,16 +1,13 @@
-# habankerim 
-web scraping using selenium:
+# NBA Injury Based Prediction 🏀
+The Project's aim is to find out when to place a real time bet on a NBA game based on players injuries status updating.
 
-![fCknC9V5Ma](https://user-images.githubusercontent.com/70581662/94001539-4f497e80-fda1-11ea-8af6-4f06238fae04.gif)
-<br />
+# Project Overview
+ 
+The data goes back to NBA 2016-17 season (without playoff games) from the following sites:
+- [NBA official injury repory](https://official.nba.com/nba-injury-report-2019-20-season/) - An official report published by the NBA organization
+- [Bankerim](https://www.bankerim.co.il/%D7%9E%D7%A9%D7%97%D7%A7%D7%99%D7%9D/%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%95%D7%95%D7%99%D7%A0%D7%A8-%D7%9C%D7%99%D7%99%D7%9F.html) - An Israeli website conatains all the odds from the Israely Sports Betting Board
+- [Rotoworld](https://www.rotoworld.com/basketball/nba/player-news/injuries) - A webstie that gathers updates, tweets and more from multiple resources.
 
 
 
-
-- we extract the data and it looks like this:
-![Screenshot 2020-09-23 143359](https://user-images.githubusercontent.com/70581662/94007301-ed414700-fda9-11ea-92e0-83e134d7f62e.png)
-<br />
-
-- we clean the data look like this:
-![Screenshot 2020-09-23 152351](https://user-images.githubusercontent.com/70581662/94011986-d7835000-fdb0-11ea-967f-7c59998da56e.png)
 
