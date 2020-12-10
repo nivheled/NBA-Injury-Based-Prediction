@@ -52,8 +52,5 @@ def cleaning_and_processing(df):
     return df
 
 
-df1 = pd.read_csv("C:/Users/97254/Desktop/winner project/2018-19 season.csv")
-
+df1 = pd.read_csv(".../season.csv")
 full_df = cleaning_and_processing(df1)  
-
-full_df.to_csv("C:/Users/97254/Desktop/winner project/2018-19 season_clean_data.csv",index = 0)  
