@@ -10,6 +10,13 @@ def split_dt(df):
     df['Game Time'] = df['date_time'].apply(lambda x: x[find_nth(x,",",2)+2:])
     return df
 
+def find_nth(word, char, n):
+    start = word.find(char)
+    while start >= 0 and n > 1:
+        start = word.find(char, start+len(char))
+        n -= 1
+    return start
+
 def switch_date_format(df):
     df['Game Date'] = df['Game Date'].apply(lambda x: datetime.strptime(x,'%b %d, %Y'))
     df['Game Date'] = df['Game Date'].dt.date
