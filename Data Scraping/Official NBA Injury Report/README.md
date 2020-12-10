@@ -30,7 +30,7 @@ During this process, we run into a few problems.
 ![5](https://user-images.githubusercontent.com/70581662/94700208-e1bec480-0343-11eb-9113-078d5725c992.png)
 <br />
 
-2. Due to the fact the we were converting from a pdf file to a pandas dataframe, the conversion is not done properly and not everything is in the right place. We fixed the problem by shifting rows to the right according to the right pattern.
+2. Due to the fact we were converting from a pdf file to a pandas dataframe, the conversion is not done properly and not everything is in the right place. We fixed the problem by shifting rows to the right according to the right pattern.
 At this stage, the dataframe looks like this:
 ![full](https://user-images.githubusercontent.com/70581662/94701872-cfde2100-0345-11eb-890f-ef5bc2ce1c27.png)
 <br />
