@@ -1,5 +1,5 @@
 # Bankerim 
-Bankerim is an Israeli website that contains historical data regarding sports betting data in Israel. An interesting feature that the website contains is the betting line change every 5 minutes. This is an important feature of our project.
+Bankerim is an Israeli website that contains historical data regarding sports betting in Israel. An interesting feature that the website contains is the betting line change every 5 minutes. This is an important feature of our project.
 
 we use selenium to collect the data:
 
