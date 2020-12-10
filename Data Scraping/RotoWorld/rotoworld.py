@@ -9,9 +9,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def report_to_df(report):
     """
-    function extract the data from a article of a report 
+    a function that extracts the data from a article of a report 
     :param div: bs4.element.Tag - the article of a report
-    :return: data frame - the data frame with the varilebles 
+    :return: data frame - the data frame with the variables 
     """    
     
     date_time = report.find('div',class_ = 'player-news-article__timestamp').text
@@ -55,9 +55,9 @@ def report_to_df(report):
 
 def source_code_to_df(content):
     """
-    function that get a page source html code in return data frame of reports 
+    a function that gets a page source HTML code and returns a data frame of reports 
     in this page
-    :param content: str - string of the html code
+    :param content: str - string of the HTML code
     :return: data frame - the data frame with all the reports 
     """
 
@@ -84,11 +84,11 @@ def source_code_to_df(content):
 
 def full_data_frame_extract(webdriver_path,base_url,numbers,folder_path):
     """
-    function that return the full data frame with the all nba injuries reports 
+    a function that returns the full dataframe with all NBA injuries reports
     :param webdriver_path: str - the path of the webdriver location
-    :param numbers: int - the numbers of pages we want to extarct
-    :param folder_path: str - the folder path that the csv for each 10000 reports will save
-    :return: data frame - the data frame with the all nba injuries reports
+    :param numbers: int - the numbers of pages we want to extract
+    :param folder_path: str - the folder path that the CSV for every 10000 reports will save
+    :return: data frame - the data frame with all NBA injuries reports
     """
 
     driver = webdriver.Chrome(webdriver_path)
