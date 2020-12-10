@@ -1,8 +1,9 @@
 library(data.table)
 library(sqldf)
 
-games <- fread("C:/Users/97254/Desktop/winner project/kaggle data set/games.csv")
-games_details <- fread("C:/Users/97254/Desktop/winner project/kaggle data set/games_details.csv")
+games <- fread(".../games.csv")
+games_details <- fread(".../games_details.csv")
+
 
 games <- games[,c('GAME_DATE_EST','GAME_ID')]
 games_details <- games_details[,c('GAME_ID','TEAM_ABBREVIATION','PLAYER_NAME')]
@@ -11,6 +12,8 @@ games_details <- games_details[,c('GAME_ID','TEAM_ABBREVIATION','PLAYER_NAME')]
 games$GAME_DATE_EST <- as.Date(games$GAME_DATE_EST,format = "%Y- %m- %d")
 games$GAME_DATE_EST <- as.numeric(games$GAME_DATE_EST)
 
+
+#joining on games ID's
 
 teams_players <- sqldf("select PLAYER_NAME as player,TEAM_ABBREVIATION as team,GAME_DATE_EST as date
       from games_details as gd join games as g on gd.GAME_ID = g.GAME_ID")
@@ -24,7 +27,7 @@ team <- teams_players[1,2]
 num<- 1
 
 
-# It is not recommended to use for loop in r dataframe, it is super slowly
+# Note that it is not recommended to use "for" loop in R dataframe due to poor runing time
 
 for (row in 1:nrow(teams_players)){
   if(teams_players[row,1] == player){
@@ -57,4 +60,4 @@ teams_players$start_date <- as.Date(teams_players$start_date ,origin ="1970-01-0
 teams_players$end_date <- as.Date(teams_players$end_date ,origin ="1970-01-01")
 
 
-write.csv(teams_players,"C:/Users/97254/Desktop/winner project/datasets/players_teams.csv", row.names = FALSE)
+write.csv(teams_players,".../players_teams.csv", row.names = FALSE)
