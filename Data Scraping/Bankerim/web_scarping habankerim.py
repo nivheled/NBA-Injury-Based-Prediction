@@ -1,21 +1,19 @@
 import numpy as np
 import pandas as pd
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait,Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 import time
 import datetime
 
 
 def days_between(d1, d2):
     """
-    function that calculate the difference between two dates
-    :param d1: string - string the. format: ("%Y-%m-%d")
-    :param d2: string - string the. format: ("%Y-%m-%d")
+    a function that calculates the difference between two dates
+    :param d1: string - string.  format: ("%Y-%m-%d")
+    :param d2: string - string.  format: ("%Y-%m-%d")
     :return: int - difference between two dates
     """       
     d1 = datetime.datetime.strptime(d1, "%Y-%m-%d").date()
@@ -24,10 +22,10 @@ def days_between(d1, d2):
 
 def find_divs_display(driver,length,div_num,wait):
     """
-    function that find the right div number for the games display in the page. also call
+    a function that finds the right div number for the games display on the page. also call
     to click_games
     :param driver: selenium.webdriver.chrome.webdriver.WebDriver - the driver object
-    :param length: int - the number od div nubmer we are checking 
+    :param length: int - the number of a div nubmer we are checking 
     :param wait: selenium.webdriver.support.wait.WebDriverWait - the wait driver object
     :return: int - the right div number 
     """
@@ -51,10 +49,10 @@ def find_divs_display(driver,length,div_num,wait):
     
 def click_games(driver,games):
     """
-    function that chcek which game display on the page in click it
+    a function that chcek which game display on the page and click on it
     :param driver: selenium.webdriver.chrome.webdriver.WebDriver - the driver object
-    :param games: list - the list of games wh check 
-    :return: bool - if find at least one game that display on the page 
+    :param games: list - the list of games we check 
+    :return: bool - if find at least one game that displays on the page 
     """
     boolean = False
     for game in games:
@@ -62,18 +60,17 @@ def click_games(driver,games):
             boolean = True
             time.sleep(1)
             game.click()
-            time.sleep(2)
+            time.sleep(1)
     return boolean
 
 def extacrct_lines_change_table_to_df(game_info):
     """
-    function extract the important data from a div of a game 
+    a function that extracts the important data from a div of a game 
     :param game_info: bs4.element.Tag - the div game_info of a game included table of lines change 
-    :return team_name0: str - the name of the home team
-    :return team_nameq: str - the name of the home team
+    :return team_name: str - the name of the home team
     :return: data frame - table with the lines change
     """    
-    missing_change_line = False # this mean the no team has plus and the line in this game didn't change
+    missing_change_line = False # this means the no team has plus and the line in this game didn't change
 
     team_name = game_info.find('span', class_ = 'teamText').text
     team_name = team_name.partition(" לדף")[0][1:]
@@ -103,9 +100,9 @@ def extacrct_lines_change_table_to_df(game_info):
 
 def extacrct_game_to_df(div):
     """
-    function extract the important data from a div of a game 
+    a function that extracts the important data from a div of a game 
     :param div: bs4.element.Tag - the div of a game 
-    :return: data frame - the data frame with the important varileble 
+    :return: data frame - the dataframe with the important variable 
     """    
     spans = div.find_all('span')
     df = pd.DataFrame()
@@ -120,11 +117,11 @@ def extacrct_game_to_df(div):
 
 def is_contain_game(df,game_check):
     """
-    function that check if game is already in the data frame
-    :param df: data frame - the data frame with all the games 
-    :param game_check: str - the teams play in the game
+    a function that checks if the game is already in the dataframe
+    :param df: dataframe - the dataframe with all the games 
+    :param game_check: str - the teams that play the game
     :return: data frame - table with the lines change
-    :return: boolean - if the data frame contain the game
+    :return: boolean - if the data frame contains the game
     """       
     is_conain = False
     games = df['teams'].tolist()
@@ -136,9 +133,9 @@ def is_contain_game(df,game_check):
 
 def fill_NaN_cells(df):
     """
-    function that fill in the NaN values
-    :param df: data frame - the data all records of a game 
-    :return: data frame - data frame witout NaN values
+    a function that fill in the NaN values
+    :param df: dataframe - the dataframe with all records of a game 
+    :return: dataframe - dataframe witout NaN values
     """       
     for index in range(6):
         df.iloc[1:,index] = df.iloc[0,index]
@@ -147,13 +144,13 @@ def fill_NaN_cells(df):
 
 def extarct_df_for_day(page_source):
     """
-    function that get a page source html code in return data frame of all games and 
+    a function that gets a page source HTML code and returns a data frame of all the games and 
     the useful details on the games
-    :param page_source: str - string of the html code
-    :return: data frame - the data frame with all the games 
+    :param page_source: str - string of the HTML code
+    :return: data frame - the dataframe with all the games 
     """
     
-    # parser the html code using xlml parser
+    # parse the HTML code using xlml parser
     soup = BeautifulSoup(page_source,'lxml')
     
     df = pd.DataFrame()
@@ -170,7 +167,6 @@ def extarct_df_for_day(page_source):
     df['2'] = np.NaN
     df['advantage'] = np.NaN
     
-    # dict with the games in their lines change table 
     games_info = soup.find_all('div',class_ = 'game-info')
     dic = {}
     for game_info in games_info:
@@ -228,20 +224,19 @@ def extarct_df_for_day(page_source):
 
 def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_path):
     """
-    function that return the full data frame with the all nba games between two dates. also 
-    save csc for each date
+    a function that returns the full data frame with all NBA games between two dates. also, save a CSV file for each date
     :param webdriver_path: str - the path of the webdriver location
-    :param base_url: str - the url adress
-    :param start_date: str - the strat date, fromat: ("%Y-%m-%d")
-    :param end_date: str -  the end date, fromat: ("%Y-%m-%d")
-    :param folder_path: str - the folder path rhat the csv for each day will save
-    :return: data frame - the data frame with all the games and the important variables 
+    :param base_url: str - the URL address
+    :param start_date: str - strat date, fromat: ("%Y-%m-%d")
+    :param end_date: str - end date, fromat: ("%Y-%m-%d")
+    :param folder_path: str - folder path that the CSV for each day will save
+    :return: data frame - a data frame with all the games and the important variables 
     """
 
     driver = webdriver.Chrome(webdriver_path)
     wait = WebDriverWait(driver,15)
     
-    # define full data frame
+    # define full dataframe
     full_df = pd.DataFrame()
     full_df['time and date'] = np.NaN
     full_df['teams'] = np.NaN
@@ -268,11 +263,11 @@ def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_p
         time.sleep(2)
         
         is_nba = False
-        # just for find exluded time.sleep()
+        # just for find excluded time.sleep()
         tochnia_element = wait.until(EC.invisibility_of_element_located((By.XPATH,"//select[@class='leagueFilter selectpicker']")))    
         tochnia_element = driver.find_element_by_xpath("//select[@class='leagueFilter selectpicker']")
         time.sleep(0.5)
-        # just for find exluded time.sleep()
+        # just for find excluded time.sleep()
         tochnia_all_options = wait.until(EC.visibility_of_element_located((By.TAG_NAME,"option")))
         tochnia_all_options = tochnia_element.find_elements_by_tag_name("option")
 
@@ -280,18 +275,18 @@ def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_p
             if(option.get_attribute("value") == 'NBA'):
                 option.click()
                 is_nba = True
-                print("There are NBA games in this day!!") 
+                print("There are NBA games on this day!!") 
                 break
         if(is_nba == False):
             start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
             start_date = str(start_date + datetime.timedelta(days=1))
-            print("There aren't NBA games in this day :(")
+            time.sleep(5)
+            print("There aren't NBA games on this day :(")
             continue
             
         tochnia_element = wait.until(EC.invisibility_of_element_located((By.XPATH,"//select[@class='roundFilter selectpicker']")))
-        #tochnia_element = driver.find_element_by_xpath("//select[@class='roundFilter selectpicker']")
 
-        # just for find exluded time.sleep()
+        # just for find excluded time.sleep()
         tochnia_all_options = wait.until(EC.visibility_of_element_located((By.TAG_NAME,"option")))    
         tochnia_all_options = tochnia_element.find_elements_by_tag_name("option")
 
@@ -301,7 +296,7 @@ def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_p
                 continue
             option.click()
 
-            # just for find exluded time.sleep()
+            # just for find excluded time.sleep()
             length = wait.until(EC.presence_of_element_located((By.XPATH,"//*[@id='winnerLinePage']/div[1]/div[1]/div[1]/section[2]/div")))
             length = len(driver.find_elements_by_xpath("//*[@id='winnerLinePage']/div[1]/div[1]/div[1]/section[2]/div"))
             div_num = find_divs_display(driver,length,div_num,wait)
@@ -320,47 +315,3 @@ def full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_p
 
     driver.quit()
     return full_df
-
-# main
-
-webdriver_path = "C:/Users/97254/Downloads/chromedriver/chromedriver"
-base_url = 'https://www.bankerim.co.il/%D7%9E%D7%A9%D7%97%D7%A7%D7%99%D7%9D/%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%95%D7%95%D7%99%D7%A0%D7%A8-%D7%9C%D7%99%D7%99%D7%9F.html?date='
-start_date = '2018-10-16'
-end_date = '2019-04-12'
-folder_path = "C:/Users/97254/Desktop/winner project/2018-19 games/"
-
-df = full_data_frame_extract(webdriver_path,base_url,start_date,end_date,folder_path)
-df.to_csv("C:/Users/97254/Desktop/winner project/2018-19 season.csv", index = False)
-
-
-
-
-
-
-# full data frame
-start_date = '2018-10-18'
-end_date = '2019-04-12'
-days_num = days_between(start_date,end_date)
-
-full_df = pd.read_csv("C:/Users/97254\Desktop/winner project/2018-19 games/NBA games on 2018-10-17.csv",index_col=0)
-path = "C:/Users/97254\Desktop/winner project/2018-19 games/NBA games on "
-for day in range(days_num):
-    #print("Date: ",start_date)
-    url = path + start_date + ".csv"
-    try: 
-        df = pd.read_csv(url,index_col=0)
-        full_df = full_df.append(df)
-    except:
-        print(start_date)
-        
-    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
-    start_date = str(start_date + datetime.timedelta(days=1))
-    
-full_df.to_csv("C:/Users/97254/Desktop/winner project/2018-19 season.csv", index = False)    
-
-
-from pandasql import sqldf
-pysqldf = lambda q: sqldf(q, globals())
-
-print(pysqldf("select teams from full_df group by teams "))
-
