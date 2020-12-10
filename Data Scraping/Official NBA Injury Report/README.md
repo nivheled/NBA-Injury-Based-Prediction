@@ -1,7 +1,7 @@
 # NBA official Injury Report
 The NBA Association requires the teams to publish 3 times a day the players' status for the next game.
-While trying to collect this data, our first goal was to gather all the infomarion in one big data frame, from which we can later train our model.
-During this process, we run into few problems.
+While trying to collect this data, our first goal was to gather all the information in one big data frame, from which we can later train our model.
+During this process, we run into a few problems.
 
 1. The NBA official injury report has 5 differnt formats since it started publishing:
 
