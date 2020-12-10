@@ -87,7 +87,7 @@ def current_stat_pattern(val):
         return True
     return False
 
-#function that matches each column to it's pattern
+#a function that matches each column to it's pattern
 def shift_by_pattern(cell, col): #function that check patterns
     
     pattern = None
@@ -123,9 +123,9 @@ def shift_by_pattern(cell, col): #function that check patterns
 
 def move_cell_right(df):
     """
-    function that locating each variable in it's right cell using the patterns above
+    a function that locating each variable in it's right cell using the patterns above
     :param df: data frame - Data frame fo NBA injury report
-    :return: data frame - Fixed data frameof the NBA official injury report 
+    :return: data frame - a fixed data frameof the NBA official injury report 
     """
     if (df.shape[1]==11|df.shape[1]==10):
         for row in range(df.shape[0]):
@@ -147,9 +147,9 @@ def move_cell_right(df):
 
 def fill_na_with_above_value(df):
     """
-    function that fill Nan values with the appropriate value  
-    :param df: data frame - Data frame fo NBA injury report
-    :return: data frame - Data frame of the NBA official injury report with values instead Nan 
+    a function that fills Nan values with the appropriate value  
+    :param df: data frame - Data frame fo the NBA injury report
+    :return: data frame - Data frame of the NBA official injury report with values instead of Nan 
     """    
     for row in range (1,df.shape[0]):
         for col in range(4):
@@ -160,8 +160,8 @@ def fill_na_with_above_value(df):
 
 def remove_if_not_submitted(df):
     """
-    function that remove rows with NOT YET SUBMITTED, which are not informative
-    :param df: data frame - the data frame fo NBA injury report
+    a function that remove rows with NOT YET SUBMITTED, which are not informative
+    :param df: data frame - the data frame fo the NBA injury report
     :return: data frame - the data frame of the NBA official injury report without rows that contains NOT YET SUBMITTED values
     """     
     if (df.shape[1]==11):
@@ -178,9 +178,9 @@ def remove_if_not_submitted(df):
 
 def arrange_df(df):
     """
-    function that making all the relevant changes in the df to make it in the right format
-    :param df: data frame - the data frame fo NBA injury report
-    :return: data frame - The final and usuful data frame of the NBA official injury report 
+    a function that making all the relevant changes in the df to make it in the right format
+    :param df: data frame - the data frame of the NBA injury report
+    :return: data frame - The final and useful data frame of the NBA official injury report 
     """      
     df1 = df.iloc[:,:df.shape[1]-2]
     df2 = df.iloc[:,df.shape[1]-2:]    
@@ -195,10 +195,10 @@ def arrange_df(df):
 
 def days_between(d1, d2):
     """
-    function that calculate the difference between two dates
-    :param d1: string - string the. format: ("%Y-%m-%d")
-    :param d2: string - string the. format: ("%Y-%m-%d")
-    :return: int - difference between two dates
+    a function that calculate the difference between two dates
+    :param d1: string - string, format: ("%Y-%m-%d")
+    :param d2: string - string, format: ("%Y-%m-%d")
+    :return: int - the difference between the two dates
     """       
     d1 = datetime.datetime.strptime(d1, "%Y-%m-%d").date()
     d2 = datetime.datetime.strptime(d2, "%Y-%m-%d").date()
@@ -207,14 +207,14 @@ def days_between(d1, d2):
 
 def extarct_official_injury_report(start_date,end_date):
     """
-    function that Unifies all the different formats of the NBA official injuries reports between two dates
-    and return full data frame.
-    :param start_date: str - the strat date, fromat: ("%Y-%m-%d")
-    :param end_date: str -  the end date, fromat: ("%Y-%m-%d")
+    a function that unifies all the different formats of the NBA official injuries reports between two dates
+    and returns the full data frame.
+    :param start_date: str - strat date, fromat: ("%Y-%m-%d")
+    :param end_date: str -  end date, fromat: ("%Y-%m-%d")
     :return: data frame - the data frame with all the NBA official injuries reports 
     """
     
-    # The NBA has 5 formar of reports Over the years.
+    # The NBA has 5 formars of reports over the years.
     """
     2018/12/17 - 2019/11/14 format is:
     [Game Date, Game Time, Matchup, Team, Player Name, Category, Reason, Current Status, Previous Status]
