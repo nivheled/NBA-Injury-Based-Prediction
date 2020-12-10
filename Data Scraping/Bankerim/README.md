@@ -1,10 +1,10 @@
-# habankerim 
-Web scraping using selenium:
+# Bankerim 
+Bankerim is an Israeli website that contains historical data regarding sports betting data in Israel. An interesting feature that the website contains is the betting line change every 5 minutes. This is an important feature of our project.
+
+we use selenium to collect the data:
 
 ![fCknC9V5Ma](https://user-images.githubusercontent.com/70581662/94001539-4f497e80-fda1-11ea-8af6-4f06238fae04.gif)
 <br />
-
-
 
 
 - Raw data:
